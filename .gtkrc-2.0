@@ -1,0 +1,28 @@
+style "geanyStyle"
+{
+    font_name="Ubuntu 10"
+    fg[NORMAL]        = "#bcbcbc"       # Main Menu TEXT colour
+    fg[PRELIGHT]      = "#b1b1b1"         # slightly darker than main text   
+    fg[ACTIVE]        = "#d8d8d8"        # lighter again than above   
+    fg[SELECTED]      = "#000000"        # black was white - #ffffff
+    fg[INSENSITIVE]   = "#757f90"        # Inactive menu entries & inactive highlight)
+  
+    bg[NORMAL]        = "#3E3E3E"           # Main Menu BACKGROUND colour - was #424242
+    bg[PRELIGHT]      = "#5058a0"        # active highlight
+    bg[ACTIVE]        = "#2b2b2b"        # darker secondary b'ground - rarely used - where (Firefox scroll bar)??
+    bg[SELECTED]      = "#5058a0"        # active highlight - was -> #5058a0
+    bg[INSENSITIVE]   = "#575757"        # lighter minor background     
+
+    text[NORMAL]      = "#ABABAB"        # Main Text, including fields
+    text[PRELIGHT]    = "#ABABAB"        #   "    "       "       "   
+    text[ACTIVE]      = "#ababab"        #   "    "       "       " 
+    text[SELECTED]    = "#ababab"        #   "    "       "       " 
+    text[INSENSITIVE] = "#757f90"        # inactive highlight - was #6F6F6F
+
+    base[NORMAL]      = "#2b2b2b"        # darker - secondary background colour
+    base[PRELIGHT]    = "#5058a0"        # active highlight & menu entries
+    base[ACTIVE]      = "#757f90"        # inactive highlight
+    base[SELECTED]    = "#5058a0"        # active highlight
+    base[INSENSITIVE] = "#575757"        # lighter minor background 
+}
+widget "Geany*" style "geanyStyle"
