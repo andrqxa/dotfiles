@@ -10,7 +10,7 @@ source ~/.vim_go/vimrcs/extended.vim
 try
 source ~/.vim_go/my_configs.vim
 catch
-endtry' > ~/.vimrc
+endtry' > ~/.vimrc.go
 
 echo '
 [Desktop Entry]
@@ -24,5 +24,6 @@ Path=
 Terminal=false
 StartupNotify=false' > ~/Desktop/VimGo.desktop
 
+chmod +x ~/Desktop/VimGo.desktop
 
 echo "Installed the Go Vim configuration successfully! Enjoy :-)"
