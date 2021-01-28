@@ -1,6 +1,5 @@
 aaron-bond.better-comments
 alefragnani.project-manager
-atipugin.rails-partial
 bungcip.better-toml
 castwide.solargraph
 DavidAnson.vscode-markdownlint
