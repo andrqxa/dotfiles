@@ -1,7 +1,6 @@
 aaron-bond.better-comments
 alefragnani.project-manager
 bungcip.better-toml
-castwide.solargraph
 DavidAnson.vscode-markdownlint
 esbenp.prettier-vscode
 foxundermoon.shell-format
