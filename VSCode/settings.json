@@ -48,7 +48,7 @@
     "[vue]": {
       "editor.formatOnSave": true
     },
-    "editor.fontFamily": "Hack Regular",
+    "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
     "editor.fontSize": 13,
     "editor.lineHeight": 24,
@@ -67,12 +67,10 @@
     "extensions.ignoreRecommendations": false,
     "git.autofetch": true,
     "git.confirmSync": false,
-    "go.autocompleteUnimportedPackages": true,
-    "go.formatTool": "goimports",
     "go.useLanguageServer": true,
     "todo-tree.highlights.enabled": true,
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "GitHub Dark",
+    "workbench.colorTheme": "One Dark Pro",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "none"
 }
