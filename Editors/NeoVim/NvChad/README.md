@@ -11,4 +11,5 @@ Step of installation
 8) go install mvdan.cc/gofumpt@latest
 9) go install github.com/segmentio/golines@latest
 10) go install github.com/go-delve/delve/cmd/dlv@latest
+11) :TSInstall go [Optional]
 
