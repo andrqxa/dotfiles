@@ -7,6 +7,24 @@ M.dap = {
       "<cmd> DapToggleBreakpoint <CR>",
       "Add breakpoint at line"
     },
+    ["<leader>dB"] = {
+      function()
+        require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+      end,
+      "Set breakpoint condition"
+    },
+    ["<leader>dlp"] = {
+      function()
+        require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+      end,
+      "Set log point message"
+    },
+    ["<leader>dr"] = {
+      function()
+        require('dap').repl.open()
+      end,
+      "Open REPL"
+    },
     ["<leader>dus"] = {
       function ()
         local widgets = require('dap.ui.widgets');
@@ -14,7 +32,31 @@ M.dap = {
         sidebar.open();
       end,
       "Open debugging sidebar"
-    }
+    },
+    ["<F5>"] = {
+      function()
+        require('dap').continue()
+      end,
+      "Continue debug"
+    },
+    ["<F10>"] = {
+      function()
+        require('dap').step_over()
+      end,
+      "Step over"
+    },
+    ["<F11>"] = {
+      function()
+        require('dap').step_into()
+      end,
+      "Step into"
+    },
+    ["<F12>"] = {
+      function()
+        require('dap').step_out()
+      end,
+      "Step out"
+    },
   }
 }
 
@@ -32,7 +74,7 @@ M.dap_go = {
         require('dap-go').debug_last()
       end,
       "Debug last go test"
-    }
+    },
   }
 }
 
