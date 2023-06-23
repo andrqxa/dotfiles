@@ -25,6 +25,44 @@ M.dap = {
       end,
       "Open REPL"
     },
+    ["<F5>"] = {
+      "<cmd> DapContinue <CR>",
+      "Continue debug"
+    },
+    ["<F6>"] = {
+      "<cmd> DapTerminate <CR>",
+      "Terminate debug"
+    },
+    ["<F10>"] = {
+      "<cmd> DapStepOver <CR>",
+      "Step over"
+    },
+    ["<F9>"] = {
+      "<cmd> DapStepInto <CR>",
+      "Step into"
+    },
+    ["<F12>"] = {
+      "<cmd> DapStepOut <CR>",
+      "Step out"
+    },
+  }
+}
+
+M.dap_ui = {
+  plugin = true,
+  n = {
+    ["<leader>duo"] = {
+      function()
+        require('dapui').open()
+      end,
+      "Debug open UI"
+    },
+    ["<leader>duc"] = {
+      function()
+        require('dapui').close()
+      end,
+      "Debug close UI"
+    },
     ["<leader>dus"] = {
       function ()
         local widgets = require('dap.ui.widgets');
@@ -32,30 +70,6 @@ M.dap = {
         sidebar.open();
       end,
       "Open debugging sidebar"
-    },
-    ["<F5>"] = {
-      function()
-        require('dap').continue()
-      end,
-      "Continue debug"
-    },
-    ["<F10>"] = {
-      function()
-        require('dap').step_over()
-      end,
-      "Step over"
-    },
-    ["<F11>"] = {
-      function()
-        require('dap').step_into()
-      end,
-      "Step into"
-    },
-    ["<F12>"] = {
-      function()
-        require('dap').step_out()
-      end,
-      "Step out"
     },
   }
 }
