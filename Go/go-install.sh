@@ -1,14 +1,43 @@
 #!/bin/bash
 
+if [[ $# -lt 1 ]]; then
+echo "Usage: ./go-install <version-of-go-to-install>" ;
+exit 1;
+fi
+
+echo "Which architecture do do you want to select?"
+
+archs=("386" "amd64" "armv6l" "arm64")
+
+select ARCH in "${archs[@]}"; do
+  case $ARCH in
+    "386")
+      echo "Вы выбрали Вариант $ARCH."
+      break
+      ;;
+    "amd64")
+      echo "Вы выбрали Вариант $ARCH."
+      break
+      ;;
+    "armv6l")
+      echo "Вы выбрали Вариант $ARCH."
+      break
+      ;;
+    "arm64")
+      echo "Вы выбрали Вариант $ARCH."
+      break
+      ;;
+  esac
+done
+
+
 VERSION=$1 # pick the latest version from https://golang.org/dl/
-ARCH=armv6l # arm64 for 64-bit OS
-USR=$2 #andrejjj
-MY_HOME=/home/$USR
+# ARCH=$2 # amd64 # arm64 for 64-bit OS
+
+MY_HOME=/home/$USER
 GO_HOME=/opt/programming
-echo $GO_HOME
 PROJECTS=$MY_HOME/projects
 GO_PATH=$PROJECTS/go
-echo $GO_PATH
 
 ## Remove old version if it exists
 rm -rf $GO_HOME/go
@@ -68,11 +97,11 @@ else
     echo "Go is not found in the PATH. Make sure to add Go's bin directory to your PATH."
 fi
 
-# Set permissions
-chown -R $USR:$USR $GO_HOME
-chown -R $USR:$USR $PROJECTS
-ls -la $GO_HOME
-ls -la $GO_PATH
-
 ## Clean up
 rm go$VERSION.linux-$ARCH.tar.gz
+
+# Set permissions
+# chown -R $USER:$USER $GO_HOME/go
+# chown -R $USER:$USER $PROJECTS
+# ls -la $GO_HOME/go
+# ls -la $GO_PATH
