@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # Check for project name argument
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <project_name>"
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <project_name> <http_port>"
     exit 1
 fi
 
 PROJECT_NAME=$1
+HTTP_PORT=$2
 
 # Create the directory structure
 mkdir -p "$PROJECT_NAME/cmd/$PROJECT_NAME"
@@ -37,11 +38,18 @@ import (
 )
 
 func main() {
+
+    if len(os.Args) < 2 {
+        fmt.Println("Usage: go run main.go <port>")
+        os.Exit(1)
+    }
+    port := os.Args[1]
+
     if err := run(); err != nil {
         log.Fatal(err)
     }
 
-    fmt.Println("Hello, ${PROJECT_NAME}!")
+    fmt.Println("Hello, $PROJECT_NAME!, your port is ", port)
 
     os.Exit(0)
 }
@@ -139,7 +147,7 @@ dc:
 	docker-compose up --remove-orphans --build
 
 run:
-	go build -o $PROJECT_NAME cmd/$PROJECT_NAME/main.go && HTTP_ADDR=:8080 ./$PROJECT_NAME
+	go build -o $PROJECT_NAME cmd/$PROJECT_NAME/main.go ./$PROJECT_NAME $HTTP_PORT
 
 test:
 	go test -race ./...
