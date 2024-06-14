@@ -5,26 +5,26 @@ echo "Usage: ./go-install <version-of-go-to-install>" ;
 exit 1;
 fi
 
-echo "Which architecture do do you want to select?"
+echo "Which architecture do you want to select?"
 
 archs=("386" "amd64" "armv6l" "arm64")
 
 select ARCH in "${archs[@]}"; do
   case $ARCH in
     "386")
-      echo "Вы выбрали Вариант $ARCH."
+      echo "You have chosen $ARCH."
       break
       ;;
     "amd64")
-      echo "Вы выбрали Вариант $ARCH."
+      echo "You have chosen $ARCH."
       break
       ;;
     "armv6l")
-      echo "Вы выбрали Вариант $ARCH."
+      echo "You have chosen $ARCH."
       break
       ;;
     "arm64")
-      echo "Вы выбрали Вариант $ARCH."
+      echo "You have chosen $ARCH."
       break
       ;;
   esac
