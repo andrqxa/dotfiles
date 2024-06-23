@@ -222,3 +222,4 @@ EOF
 cd ..
 
 echo "Project structure for $PROJECT_NAME has been successfully created."
+
