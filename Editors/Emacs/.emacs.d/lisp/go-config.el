@@ -21,7 +21,7 @@
 
   ;; Go conventions
   (setq-local indent-tabs-mode t)
-  (setq-local tab-width 8)
+  (setq-local tab-width 4)
 
   ;; Default compile command
   (setq-local compile-command "go test ./..."))
@@ -34,6 +34,9 @@
   (define-key go-mode-map (kbd "C-c C-f") #'eglot-format)
   (define-key go-mode-map (kbd "C-c C-d") #'eldoc)
   (define-key go-mode-map (kbd "C-c C-t") #'go-test-current-file)
-  (define-key go-mode-map (kbd "C-c C-p") #'go-test-current-project))
+  (define-key go-mode-map (kbd "C-c C-p") #'go-test-current-project)
+  ;; Explicit completion-at-point (Lean-friendly)
+  (when (eq my/profile 'lean)
+    (define-key go-mode-map (kbd "C-c C-SPC") #'completion-at-point)))
 
 (provide 'go-config)
