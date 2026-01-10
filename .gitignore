@@ -109,3 +109,13 @@ crashlytics-build.properties
 
 # Windows clutter
 Thumbs.db
+
+# Emacs generated/runtime files (any location)
+**/.emacs.d/elpa/
+**/.emacs.d/auto-save-list/
+**/.emacs.d/eln-cache/
+**/.emacs.d/eshell/
+**/.emacs.d/tramp/
+**/.emacs.d/recentf
+**/.emacs.d/savehist
+**/.emacs.d/var/
