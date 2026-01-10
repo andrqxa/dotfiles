@@ -1,39 +1,34 @@
-(let ((go-bin (expand-file-name "~/Projects/go/bin")))
-  (when (file-directory-p go-bin)
-    (add-to-list 'exec-path go-bin)
-    (setenv "PATH" (concat go-bin ":" (getenv "PATH")))))
+;; =============================
+;; Go toolchain sanity checks
+;; =============================
+(unless (executable-find "go")
+  (message "WARNING: go not found in PATH"))
 
+(unless (executable-find "gopls")
+  (message "WARNING: gopls not found in PATH"))
 
-;; -----------------------------
+;; =============================
 ;; Go mode
-;; -----------------------------
+;; =============================
 (use-package go-mode
   :mode "\\.go\\'"
   :hook ((go-mode . eglot-ensure)
-         (before-save . gofmt-before-save)))
+         (go-mode . my/go-mode-setup)))
 
-;; -----------------------------
-;; LSP (eglot)
-;; -----------------------------
-(use-package eglot
-  :ensure nil)
+(defun my/go-mode-setup ()
+  ;; Canonical Go formatting on save (buffer-local)
+  (add-hook 'before-save-hook #'eglot-format nil t)
 
-(add-to-list 'eglot-server-programs
-             '(go-mode . ("gopls")))
+  ;; Go conventions
+  (setq-local indent-tabs-mode t)
+  (setq-local tab-width 8)
 
-(setq eglot-autoshutdown t)
-(setq eglot-send-changes-idle-time 0.5)
+  ;; Default compile command
+  (setq-local compile-command "go test ./..."))
 
-;; -----------------------------
-;; gofmt / goimports
-;; -----------------------------
-(defun gofmt-before-save ()
-  (when (eq major-mode 'go-mode)
-    (eglot-format)))
-
-;; -----------------------------
-;; Keybindings
-;; -----------------------------
+;; =============================
+;; Go keybindings
+;; =============================
 (with-eval-after-load 'go-mode
   (define-key go-mode-map (kbd "C-c C-r") #'eglot-rename)
   (define-key go-mode-map (kbd "C-c C-f") #'eglot-format)

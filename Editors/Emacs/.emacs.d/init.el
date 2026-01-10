@@ -1,6 +1,6 @@
-;; -----------------------------
+;; =============================
 ;; Package system
-;; -----------------------------
+;; =============================
 (require 'package)
 
 (setq package-archives
@@ -12,16 +12,23 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-(dolist (pkg '(use-package))
-  (unless (package-installed-p pkg)
-    (package-install pkg)))
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; -----------------------------
+;; =============================
+;; Profile (ide | lean)
+;; =============================
+(defconst my/profile
+  (intern (or (getenv "EMACS_PROFILE") "ide")))
+
+(message "Emacs profile: %s" my/profile)
+
+;; =============================
 ;; UI / basics
-;; -----------------------------
+;; =============================
 ;;(setq inhibit-startup-screen t)
 ;;(menu-bar-mode -1)
 ;;(tool-bar-mode -1)
@@ -32,32 +39,43 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-;; -----------------------------
-;; Completion
-;; -----------------------------
-(use-package corfu
-  :init
-  (global-corfu-mode)
-  :custom
-  (corfu-auto t)        ;; автопоказ
-  (corfu-auto-delay 0.1)
-  (corfu-auto-prefix 1)
-  (corfu-cycle t))
+;; =============================
+;; Completion (IDE only)
+;; =============================
+(when (eq my/profile 'ide)
+  (use-package corfu
+    :init
+    (global-corfu-mode)
+    :custom
+    (corfu-auto t)
+    (corfu-auto-delay 0.1)
+    (corfu-auto-prefix 1)
+    (corfu-cycle t)))
 
-
-;; -----------------------------
+;; =============================
 ;; Project management
-;; -----------------------------
+;; =============================
 (use-package project
   :ensure nil)
 
-;; -----------------------------
-;; Git
-;; -----------------------------
-(use-package magit)
+;; =============================
+;; Git (IDE only)
+;; =============================
+(when (eq my/profile 'ide)
+  (use-package magit))
 
-;; -----------------------------
+;; =============================
+;; LSP (eglot)
+;; =============================
+(use-package eglot
+  :ensure nil
+  :config
+  (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
+  (setq eglot-autoshutdown t
+        eglot-send-changes-idle-time 0.5))
+
+;; =============================
 ;; Go config
-;; -----------------------------
+;; =============================
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (require 'go-config)
