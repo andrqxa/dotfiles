@@ -1,0 +1,7 @@
+color-link default "#d0d0d0,#000000"
+color-link keyword "#ffaf00"
+color-link type "#87afff"
+color-link string "#87ffaf"
+color-link comment "#5f875f"
+color-link constant "#d7875f"
+color-link identifier "#ffffff"

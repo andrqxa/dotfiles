@@ -1,0 +1,29 @@
+{
+  "colorscheme": "simple",
+  "syntax": true,
+  "softwrap": false,
+  "tabsize": 4,
+  "tabstospaces": false,
+  "indentation": true,
+
+  "ruler": true,
+  "scrollbar": false,
+  "cursorline": true,
+
+  "autosave": 5,
+  "backup": false,
+
+  "mouse": true,
+  "clipboard": "terminal",
+
+  "statusline": true,
+  "statusformatl": "$(filename) $(modified)",
+  "statusformatr": "$(line):$(col)  $(filetype)",
+
+  "diffgutter": true,
+  "matchbrace": true,
+
+  "pluginchannels": [
+    "https://raw.githubusercontent.com/zyedidia/micro/master/runtime/plugins/channel.json"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "Ctrl-s": "Save",
+  "Ctrl-q": "Quit",
+  "Ctrl-b": "ToggleSidebar",
+  "Ctrl-p": "CommandMode",
+
+  "Ctrl-f": "Find",
+  "Ctrl-n": "FindNext",
+  "Ctrl-Shift-n": "FindPrevious",
+
+  "Alt-Up": "MoveLinesUp",
+  "Alt-Down": "MoveLinesDown",
+
+  "Ctrl-Space": "Autocomplete"
+}
