@@ -1,0 +1,9 @@
+theme = "catppuccin_mocha"
+
+[editor]
+line-number = "relative"
+cursorline = true
+auto-save = true
+
+[editor.lsp]
+display-messages = true
