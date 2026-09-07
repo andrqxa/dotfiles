@@ -41,7 +41,7 @@ return {
   -- ── Go debugging ──────────────────────────────────────────────────
   {
     "mfussenegger/nvim-dap",
-    ft = "go",
+    ft = { "go", "c", "cpp", "asm" },
     dependencies = {
       {
         "leoluz/nvim-dap-go",
@@ -76,6 +76,61 @@ return {
       dap.listeners.before.event_exited["dapui"] = function()
         dapui.close()
       end
+
+      -- ── C / ARM assembly (Bootlin debugging labs, RPi2) ───────────
+      -- GDB speaks DAP itself since version 14 (`--interpreter=dap`), so there is no
+      -- separate adapter binary to install and no cpptools/codelldb in the tree.
+      --   $GDB     -- a cross gdb, e.g. buildroot's output/host/bin/aarch64-linux-gdb;
+      --              falls back to gdb-multiarch, which is what the labs install.
+      --   $SYSROOT -- the target's libraries (buildroot output/staging). Without it a
+      --              remote session has no libc symbols and every backtrace stops at
+      --              the call into the library. Read at startup, so export it in the
+      --              shell (or a profile.d snippet) before launching nvim.
+      local gdb = vim.env.GDB
+      if not gdb or gdb == "" then
+        gdb = vim.fn.executable "gdb-multiarch" == 1 and "gdb-multiarch" or "gdb"
+      end
+
+      local gdb_args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+      if vim.env.SYSROOT and vim.env.SYSROOT ~= "" then
+        vim.list_extend(gdb_args, { "--eval-command", "set sysroot " .. vim.env.SYSROOT })
+      end
+
+      dap.adapters.gdb = { type = "executable", command = gdb, args = gdb_args }
+
+      -- The binary is asked for even on a remote attach: gdb-multiarch cannot guess the
+      -- target's architecture, and the file is what tells it this is ARM (labs, p. 1056).
+      local function ask_binary()
+        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+      end
+
+      local c_configs = {
+        {
+          name = "Launch a local binary",
+          type = "gdb",
+          request = "launch",
+          program = ask_binary,
+          cwd = "${workspaceFolder}",
+          stopAtBeginningOfMainSubprogram = false,
+        },
+        {
+          -- One entry for every remote target the course uses, because they differ only
+          -- in this string: `gdbserver --multi :2000` on the board, valgrind's vgdb on
+          -- :1234, and kgdb on the serial line as /dev/pts/N.
+          name = "Attach to a remote target (gdbserver / vgdb / kgdb)",
+          type = "gdb",
+          request = "attach",
+          program = ask_binary,
+          cwd = "${workspaceFolder}",
+          target = function()
+            return vim.fn.input("Target (host:port or /dev/pts/N): ", "192.168.0.100:2000")
+          end,
+        },
+      }
+
+      dap.configurations.c = c_configs
+      dap.configurations.cpp = c_configs
+      dap.configurations.asm = c_configs
     end,
   },
 

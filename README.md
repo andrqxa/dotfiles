@@ -17,7 +17,7 @@ Then symlink the pieces you need (see [Usage](#usage)).
 | Path | What's inside |
 |------|---------------|
 | `Editors/VSCode/` | `settings.json` (extensions are handled by VS Code Settings Sync) |
-| `Editors/NeoVim/NvChad/` | NvChad 2.5 config — Go (gopls/conform/dap/gopher) + tmux/AI tweaks |
+| `Editors/NeoVim/NvChad/` | NvChad 2.5 config — Go (gopls/conform/dap/gopher), C + ARM asm (clangd, gdb over DAP) + tmux/AI tweaks |
 | `Editors/Emacs/.emacs.d/` | `init.el` with `ide`/`lean` profiles + `lisp/go-config.el` |
 | `Editors/helix/` | `config.toml` |
 | `Editors/micro/` | `settings.json`, `bindings.json`, `colorschemes/` |
